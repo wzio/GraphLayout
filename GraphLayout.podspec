@@ -20,7 +20,7 @@ GraphLayout - UI controls for  graph visualization. It is powered by Graphviz. G
   s.source           = { :git => 'https://github.com/bakhtiyork/GraphLayout.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
-  s.swift_version = '4.0'
+  s.swift_version = '5.0'
 
   s.source_files = 'GraphLayout/Classes/**/*'
   s.libraries = 'z', 'stdc++'

@@ -21,7 +21,7 @@ public class GraphView: UIView {
     public override func draw(_ rect: CGRect) {
         if let graph = self.graph, let context = UIGraphicsGetCurrentContext() {
             context.saveGState()
-            UIColor.white.setFill()
+            backgroundColor?.setFill()
             UIRectFill(rect)
             context.translateBy(x: padding, y: padding)
 
@@ -64,9 +64,9 @@ public class GraphView: UIView {
                     path.stroke()
 
                     let attributes = [
-                        NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(node.fontSize)),
-                        NSAttributedStringKey.foregroundColor: node.textColor,
-                        NSAttributedStringKey.paragraphStyle: paraStyle,
+                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(node.fontSize)),
+                        NSAttributedString.Key.foregroundColor: node.textColor,
+                        NSAttributedString.Key.paragraphStyle: paraStyle,
                     ]
                     let label = node.label
                     let labelSize = label.size(withAttributes: attributes)

@@ -137,7 +137,7 @@ public class Graph {
 
     public func removeNode(node: Node) {
         guard nodes.count > 1 else { return }
-        if let index = nodes.index(of: node) {
+        if let index = nodes.firstIndex(of: node) {
             for edge in edges {
                 if edge.from == node || edge.to == node {
                     removeEdge(edge: edge)
@@ -154,7 +154,7 @@ public class Graph {
     }
 
     public func removeEdge(edge: Edge) {
-        if let index = edges.index(of: edge) {
+        if let index = edges.firstIndex(of: edge) {
             edges.remove(at: index)
         }
     }
