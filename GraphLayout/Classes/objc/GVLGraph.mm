@@ -55,6 +55,8 @@ float _dpi = 72.0f;
     float height = ND_height(self.node) * _dpi;
     CGPathRef cgpath =
         [GVLUtils toPathWithType:ND_shape(self.node)->name
+                       nodeStyle: self.nodeStyle
+                 nodeRoundCorner: self.nodeRoundedCorner
                             poly:(polygon_t *)ND_shape_info(self.node)
                            width:width
                           height:height];
@@ -349,6 +351,8 @@ float _dpi = 72.0f;
 }
 
 + (CGPathRef)toPathWithType:(const char *)type
+                  nodeStyle:(NSString *)nodeStyle
+            nodeRoundCorner:(CGFloat)nodeRoundCorner
                        poly:(const polygon_t *)poly
                       width:(float)width
                      height:(float)height {
@@ -356,10 +360,16 @@ float _dpi = 72.0f;
         (strcmp(type, "hexagon") == 0) || (strcmp(type, "polygon") == 0) ||
         (strcmp(type, "diamond") == 0) || (strcmp(type, "Mdiamond") == 0) ||
         (strcmp(type, "Msquare") == 0) || (strcmp(type, "star") == 0)) {
-        NSMutableArray *points =
-            [GVLUtils toPolygon:poly width:width height:height];
-        [points addObject:[points firstObject]];
-        return [GVLUtils toPath:points];
+        if ([nodeStyle isEqualToString:@"rounded"] && ((strcmp(type, "rectangle") == 0) || (strcmp(type, "box") == 0)) ) {
+            CGRect rect = CGRectMake(0, 0, width, height);
+            return CGPathCreateWithRoundedRect(rect, nodeRoundCorner, nodeRoundCorner, NULL);
+        } else {
+            NSMutableArray *points =
+                [GVLUtils toPolygon:poly width:width height:height];
+            [points addObject:[points firstObject]];
+            return [GVLUtils toPath:points];
+        }
+
     } else if ((strcmp(type, "ellipse") == 0) ||
                (strcmp(type, "circle") == 0)) {
         NSMutableArray *points =

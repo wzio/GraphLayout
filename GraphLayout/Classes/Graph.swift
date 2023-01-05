@@ -6,9 +6,7 @@
 //  MIT License
 //
 
-public enum Shape: String {
-    case rectangle, box, hexagon, polygon, diamond, star, ellipse, circle
-}
+
 
 public class Edge: Equatable {
     fileprivate var gvlEdge: GVLEdge?
@@ -18,6 +16,7 @@ public class Edge: Equatable {
     public var color: UIColor = UIColor.black
     public var width: Float = 1.0
     public var weight: Float = 1
+
 
     public init(from node1: Node, to node2: Node) {
         from = node1
@@ -54,55 +53,10 @@ public class Edge: Equatable {
 
     func prepare() {
         setAttribute(name: "weight", value: weight.description)
+
     }
 
     public static func == (lhs: Edge, rhs: Edge) -> Bool {
-        return lhs === rhs
-    }
-}
-
-public class Node: Equatable {
-    fileprivate var gvlNode: GVLNode?
-
-    public let label: String
-    public var color: UIColor = UIColor.white
-    public var highlihtedColor: UIColor = UIColor.lightGray
-    public var borderColor: UIColor = UIColor.black
-    public var borderWidth: Float = 1.0
-    public var textColor: UIColor = UIColor.black
-    public var fontSize: Int = 14
-    public var shape: Shape = .ellipse
-
-    public init(label: String) {
-        self.label = label
-    }
-
-    public func getAttribute(name: String) -> String? {
-        return gvlNode?.getAttributeForKey(name)
-    }
-
-    func setAttribute(name: String, value: String) {
-        gvlNode?.setAttribute(value, forKey: name)
-    }
-
-    public func frame() -> CGRect? {
-        return gvlNode?.frame()
-    }
-
-    public func bounds() -> CGRect? {
-        return gvlNode?.bounds()
-    }
-
-    public func path() -> UIBezierPath? {
-        return gvlNode?.path()
-    }
-
-    func prepare() {
-        setAttribute(name: "fontsize", value: fontSize.description)
-        setAttribute(name: "shape", value: shape.rawValue)
-    }
-
-    public static func == (lhs: Node, rhs: Node) -> Bool {
         return lhs === rhs
     }
 }
@@ -124,7 +78,7 @@ public class Graph {
     public private(set) var edges = [Edge]()
     public private(set) var size = CGSize.zero
     public var splines: Splines = .spline
-
+    
     public init() {
         gvlGraph = GVLGraph()
     }

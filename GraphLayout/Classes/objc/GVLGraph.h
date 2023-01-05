@@ -15,6 +15,8 @@
 @property Agraph_t *parent;
 @property Agnode_t *node;
 @property NSString *label;
+@property NSString *nodeStyle;
+@property CGFloat nodeRoundedCorner;
 - (void)setAttribute:(NSString *)value forKey:(NSString *)key;
 - (NSString *)getAttributeForKey:(NSString *)key;
 - (void)prepare;
@@ -65,6 +67,8 @@
                         width:(float)width
                        height:(float)height;
 + (CGPathRef)toPathWithType:(const char *)type
+                  nodeStyle:(NSString *)nodeStyle
+            nodeRoundCorner:(CGFloat)nodeRoundCorner
                        poly:(const polygon_t *)poly
                       width:(float)width
                      height:(float)height;

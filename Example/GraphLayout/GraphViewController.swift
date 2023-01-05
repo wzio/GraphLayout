@@ -17,6 +17,7 @@ class GraphViewController: UIViewController {
         super.viewDidLoad()
 
         graphView = GraphView()
+        graphView.backgroundColor = .white
         graph.applyLayout()
 
         graphView.graph = graph
